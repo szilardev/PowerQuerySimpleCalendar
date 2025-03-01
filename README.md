@@ -36,6 +36,7 @@ let
     CalendarWithDay = Table.AddColumn(CalendarWithMonth, "Day", each Date.Day([Date]), Int64.Type)
 in
     CalendarWithDay
+```
 
 ### 3. Run the Query
 After inserting and customizing the code:
