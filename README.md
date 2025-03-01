@@ -26,16 +26,14 @@ You can adjust the start and end dates in the code to generate a calendar for yo
 
 ```m
 let
-    StartDate = #date(2020, 1, 1),   // Set your desired start date
-    EndDate = #date(2020, 12, 31),     // Set your desired end date
-    NumberOfDays = Duration.Days(EndDate - StartDate) + 1,
-    DateList = List.Dates(StartDate, NumberOfDays, #duration(1, 0, 0, 0)),
-    CalendarTable = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}),
-    CalendarWithYear = Table.AddColumn(CalendarTable, "Year", each Date.Year([Date]), Int64.Type),
-    CalendarWithMonth = Table.AddColumn(CalendarWithYear, "Month", each Date.Month([Date]), Int64.Type),
-    CalendarWithDay = Table.AddColumn(CalendarWithMonth, "Day", each Date.Day([Date]), Int64.Type)
-in
-    CalendarWithDay
+    // Parameters
+    Begin = try BeginDate otherwise #date(Date.Year(DateTime.LocalNow())-5,1,1),  // BeginDate parameter or #date(ThisYear-5,month,day) or you can switch the BeginDate to #date(year, month, day) 
+    LangCode = "en-US",                                                           // US english en-US, british english en-GB, hungarian hu-HU, german de-DE
+    FirstDayOfWeek = Day.Monday,                                                  // Day.Monday, Day.Sunday
+    
+    // Generate Data from here 
+    ToDate = #date(Date.Year(DateTime.LocalNow())+1,12,31),                        //The closing date is December 31st of the following year by default. 
+    [...]
 ```
 
 ### 3. Run the Query
